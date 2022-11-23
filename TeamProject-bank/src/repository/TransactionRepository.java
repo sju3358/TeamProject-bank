@@ -12,45 +12,24 @@ public class TransactionRepository{
     private long amountOfTransaction;
     private LocalDate transactionTime;
 
-
-    public TransactionRepository(){}
-    public TransactionRepository(String nameOfBank, String accountNumber, int amountOfTransaction, LocalDate transactionTime){
+    public TransactionRepository(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDate transactionTime){
         this.nameOfBank = nameOfBank;
         this.accountNumber = accountNumber;
         this.amountOfTransaction = amountOfTransaction;
         this.transactionTime = transactionTime;
     }
 
+    public String toString() {
 
+        String to_string = null;
 
+        to_string += "-----------------------------\n";
+        to_string += "은행명 : " + this.nameOfBank + "\n";
+        to_string += "계좌번호 : " + this.accountNumber + "\n";
+        to_string += "입출금내역 : " + this.amountOfTransaction + "\n";
+        to_string += "거래일시 : " + this.transactionTime.toString() + "\n";
 
-    public String getNameOfBank() {
-        return nameOfBank;
-    }
-    public void setNameOfBank(String nameOfBank) {
-        this.nameOfBank = nameOfBank;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public long getAmountOfTransaction() {
-        return amountOfTransaction;
-    }
-    public void setAmountOfTransaction(long amountOfTransaction) {
-        this.amountOfTransaction = amountOfTransaction;
-    }
-
-
-    public LocalDate getTransactionTime() {
-        return transactionTime;
-    }
-    public void setTransactionTime(LocalDate transactionTime) {
-        this.transactionTime = transactionTime;
+        return to_string;
     }
 }
 

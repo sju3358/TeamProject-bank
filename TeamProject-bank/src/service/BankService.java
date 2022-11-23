@@ -1,10 +1,10 @@
 package service;
 
-
 import repository.BankAccountRepository;
-import repository.TransactionRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 //은행서비스
 public class BankService {
@@ -18,46 +18,97 @@ public class BankService {
         bankAccountService = BankAccountService.getInstance();
     }
 
-    // 기능 1. 계좌번호 등록 , 계좌번호는 정규표현식으로 제한.
-    // 기능 2. 계좌 수정
-    // 기능 3. 계좌 삭제
-    // 기능 4. 계좌 검색 (소유자 명으로)
 
-    //입출금기능
-    public void depositMoney(BankAccountRepository account, int amount){
-
-        try {
-            bankAccountService.depositAndWithdraw(account.getBankAccountNumber(),amount);
-
-            //잔고 변동시 트렌젝션 기록
-            LocalDate date = LocalDate.now();
-
-            transactionHistoryService.addTransaction(
-                            account.getBankName(),
-                            account.getBankAccountNumber(),
-                            amount,
-                            date
-            );
-        }
-        catch (NullPointerException e){
-            System.out.println(e.getMessage());
-        }
-        catch (IllegalStateException e){
-            System.out.println(e.getMessage());
-        }
-
+    /**
+     * 계좌 등록 메소드
+     * @param bankName (String)
+     * @param bankOwnerName (String)
+     * @param bankAccountNumber (String)
+     * @param bankBalance (long)
+     */
+    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance ){
+        bankAccountService.addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance);
     }
 
 
-    //송금기능
+    /**
+     * 계좌 수정 메소드
+     * @param bankName (String)
+     * @param bankOwnerName (String)
+     * @param bankAccountNumber (String)
+     * @param bankBalance (long)
+     */
+    public void changeAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance){
+        deleteAccount(bankAccountNumber);
+        addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance);
+    }
 
-    // 기능 5. 모든 계좌목록 조회
+    /**
+     * 계좌 삭제 메소드
+     * @param bankAccountNumber (String)
+     */
+    public void deleteAccount(String bankAccountNumber){
+
+        boolean flag = bankAccountService.deleteAccount(bankAccountNumber);
+
+            if(flag == true)
+                System.out.println("삭제 성공");
+    }
+
+    /**
+     * 계좌 이름으로 검색 메소드
+     * @param name (String)
+     */
+    public void searchAccount(String name){
+
+        ArrayList<BankAccountRepository> accounts = bankAccountService.getAccountsByName(name);
+
+        Iterator<BankAccountRepository> iteratorOfAccount = accounts.iterator();
+
+        System.out.println("계좌 검색 결과");
+
+        while(iteratorOfAccount.hasNext()){
+            BankAccountRepository account = iteratorOfAccount.next();
+            System.out.println(account.toString());
+        }
+    }
+
+    /**
+     * 계좌 입출금 기능
+     * @param BankAccountNumber (String)
+     *  @param amount (int)
+     */
+    public void depositAndWithdrawMoney(String BankAccountNumber, int amount){
+
+        boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount);
+
+        if(flag == true) {
+            BankAccountRepository account = bankAccountService.getAccountsByBankAccountNumber(BankAccountNumber);
+            //잔고 변동시 트렌젝션 기록
+            LocalDate date = LocalDate.now();
+            transactionHistoryService.addTransaction(
+                    account.getBankName(),
+                    account.getBankAccountNumber(),
+                    amount,
+                    date);
+        }
+    }
+
+
+    // 기능 6. 송금기능
+
+
+    /**
+     * 모든 계좌 리스트
+     */
     public void listAllOfAccounts(){
         System.out.println("계좌 목록 조회");
         bankAccountService.listAccounts();
     }
 
-    // 기능 6. 모든 거래내역 조회
+    /**
+     * 모든 거래내역 리스트
+     */
     public void listAllOfTransactions(){
         System.out.println("거래 내역 조회");
         transactionHistoryService.listTransactions();
