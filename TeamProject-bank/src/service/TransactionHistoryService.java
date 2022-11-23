@@ -36,7 +36,7 @@ public class TransactionHistoryService {
     }
 
 
-    public void addTransaction(String nameOfBank, String accountNumber, long amountOfTransaction, int flagDepositOrWithdraw, LocalDate transactionTime  ){
+    public void addTransaction(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDate transactionTime  ){
         TransactionRepository transaction = new TransactionRepository();
 
         transaction.setNameOfBank(nameOfBank);

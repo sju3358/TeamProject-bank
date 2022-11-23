@@ -31,13 +31,12 @@ public class BankService {
 
             //잔고 변동시 트렌젝션 기록
             LocalDate date = LocalDate.now();
+
             transactionHistoryService.addTransaction(
-                    new TransactionRepository(
                             account.getBankName(),
                             account.getBankAccountNumber(),
                             amount,
                             date
-                    )
             );
         }
         catch (NullPointerException e){
