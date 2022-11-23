@@ -21,7 +21,7 @@ public class TransactionRepository{
 
     public String toString() {
 
-        String to_string = null;
+        String to_string = "";
 
         to_string += "-----------------------------\n";
         to_string += "은행명 : " + this.nameOfBank + "\n";

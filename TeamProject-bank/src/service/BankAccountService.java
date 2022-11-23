@@ -137,7 +137,7 @@ public class BankAccountService
 
         while (iteratorOfAccount.hasNext()) {
             BankAccountRepository account = this.bankAccountsList.get(iteratorOfAccount.next());
-
+            System.out.println(account.toString());
         }
     }
 }

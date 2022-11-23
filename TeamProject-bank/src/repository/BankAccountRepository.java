@@ -46,9 +46,10 @@ public class BankAccountRepository {
     }
     public String toString() {
 
-        String to_string = null;
+        String to_string = "";
 
         to_string += "-----------------------------\n";
+        to_string += "은행이름 : " + this.bankName + "\n";
         to_string += "소유자명 : " + this.bankOwnerName + "\n";
         to_string += "계좌번호 : " + this.bankAccountNumber + "\n";
         to_string += "잔   고 : " + this.bankBalance + "\n";
