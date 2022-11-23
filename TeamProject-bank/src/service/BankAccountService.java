@@ -40,13 +40,15 @@ public class BankAccountService
         );
         bankAccountsList.put(bankAccountNumber, newAccount);
     }
-    public boolean deleteAccount(String bankAccountNumber){
+    public boolean deleteAccount(String bankAccountNumber, String password){
 
         try{
             BankAccountRepository account = bankAccountsList.get(bankAccountNumber);
 
             if(account == null)
                 throw new NoAccountException("해당 계좌가 존재하지 않습니다.");
+            if(account.checkPassword(password) == false)
+                throw new NoAccountException("비밀번호가 일치하지 않습니다");
 
             boolean flag = bankAccountsList.remove(bankAccountNumber, account);
 
@@ -136,6 +138,8 @@ public class BankAccountService
         }
 
     }
+
+
     public void listAccounts() {
         Iterator<String> iteratorOfAccount = this.bankAccountsList.keySet().iterator();
 
