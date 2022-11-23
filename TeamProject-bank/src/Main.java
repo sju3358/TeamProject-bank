@@ -21,5 +21,12 @@ public class Main {
         password = "1234";
         bs.addAccount(bankName,bankOwner,bankNumber,balance,password);
         bs.listAllOfAccounts();
+
+
+        bs.depositAndWithdrawMoney("72327272",1000);
+        bs.depositAndWithdrawMoney("72727272",1230);
+        bs.listAllOfAccounts();
+
+        bs.listAllOfTransactions();
     }
 }

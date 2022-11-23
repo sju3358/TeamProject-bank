@@ -10,9 +10,9 @@ public class TransactionRepository{
     private String nameOfBank;
     private String accountNumber;
     private long amountOfTransaction;
-    private LocalDate transactionTime;
+    private LocalDateTime transactionTime;
 
-    public TransactionRepository(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDate transactionTime){
+    public TransactionRepository(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDateTime transactionTime){
         this.nameOfBank = nameOfBank;
         this.accountNumber = accountNumber;
         this.amountOfTransaction = amountOfTransaction;
