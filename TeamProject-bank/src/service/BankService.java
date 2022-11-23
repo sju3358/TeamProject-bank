@@ -78,7 +78,8 @@ public class BankService {
     /**
      * 계좌 입출금 메소드
      * @param BankAccountNumber (String)
-     *  @param amount (int)
+     * @param amount (int)
+     * @param password (String)
      */
     public void depositAndWithdrawMoney(String BankAccountNumber, int amount , String password){
 
