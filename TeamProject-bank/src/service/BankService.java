@@ -39,12 +39,11 @@ public class BankService {
      * @param password (String)
      */
     public boolean changeAccount(String bankOwnerName, String bankAccountNumber, String password){
-        long bankBalance = bankAccountService.getAccountsByNumber(bankAccountNumber).getBankBalance();
-        boolean flag = bankAccountService.deleteAccount(bankAccountNumber, password);
-        if(flag== true) {
-            addAccount(bankOwnerName, bankAccountNumber, bankBalance, password);
+
+        boolean flag = bankAccountService.modifyAccount(this.bankName,bankOwnerName,bankAccountNumber,password);
+
+        if(flag== true)
             return true;
-        }
         else
             return false;
     }
@@ -61,6 +60,15 @@ public class BankService {
         else
             return false;
 
+    }
+
+    /**
+     * 잔액 조회 메소드
+     * @param bankAccountNumber (String)
+     *  @param password (String)
+     */
+    public long getAccountBalance(String bankAccountNumber, String password){
+        return bankAccountService.getAccountBalance(bankAccountNumber, password);
     }
 
     /**
@@ -113,14 +121,6 @@ public class BankService {
         }
     }
 
-    /**
-     * 잔액 조회 메소드
-     * @param bankAccountNumber (String)
-     *  @param password (String)
-     */
-    public long getAccountBalance(String bankAccountNumber, String password){
-        return bankAccountService.getAccountBalance(bankAccountNumber, password);
-    }
 
     // 기능 6. 송금기능
 
