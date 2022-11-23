@@ -79,12 +79,15 @@ public class BankAccountService
             return 0;
         }
     }
-    public boolean depositAndWithdraw(String bankAccountNumber , int amount){
+    public boolean depositAndWithdraw(String bankAccountNumber , int amount, String password){
         try {
             BankAccountRepository bankAccount = bankAccountsList.get(bankAccountNumber);
 
             if (bankAccount == null)
                 throw new NoAccountException("계좌가 존재하지 않습니다.");
+
+            if(amount < 0 && bankAccount.checkPassword(password) == false)
+                throw new NoAccountException("비밀번호가 틀렸습니다.");
 
             if (bankAccount.getBankBalance() + amount < 0 )
                 throw new NotEnoughException("잔액이 충분하지 않습니다.");
