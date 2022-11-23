@@ -23,14 +23,13 @@ public class BankService {
     // 기능 3. 계좌 삭제
     // 기능 4. 계좌 검색 (소유자 명으로)
 
-
-
+    //입출금기능
     public void depositMoney(BankAccountRepository account, int amount){
-        //errorCode : 1 : 성공 , 2: 잔고부족 , 3: 계좌검색불가능
 
         try {
             bankAccountService.depositAndWithdraw(account.getBankAccountNumber(),amount);
 
+            //잔고 변동시 트렌젝션 기록
             LocalDate date = LocalDate.now();
             transactionHistoryService.addTransaction(
                     new TransactionRepository(
@@ -49,6 +48,9 @@ public class BankService {
         }
 
     }
+
+
+    //송금기능
 
     // 기능 5. 모든 계좌목록 조회
     public void listAllOfAccounts(){
