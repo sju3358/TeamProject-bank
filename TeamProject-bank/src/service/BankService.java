@@ -1,10 +1,8 @@
 package service;
 
-import repository.BankAccountRepository;
+
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 //은행서비스
 public class BankService {
@@ -75,15 +73,7 @@ public class BankService {
      * @param name (String)
      */
     public void searchAccountByName(String name){
-
-        ArrayList<BankAccountRepository> accounts = bankAccountService.getAccountsByName(name);
-
-        Iterator<BankAccountRepository> iteratorOfAccount = accounts.iterator();
-
-        while(iteratorOfAccount.hasNext()){
-            BankAccountRepository account = iteratorOfAccount.next();
-            System.out.println(account.toString());
-        }
+        System.out.println(bankAccountService.getAccountsByName(name));
     }
 
     /**
@@ -91,9 +81,12 @@ public class BankService {
      * @param bankAccountNumber
      */
     public void searchAccountByNumber(String bankAccountNumber){
-        BankAccountRepository account = bankAccountService.getAccountsByNumber(bankAccountNumber);
-        if(account != null)
-            System.out.println(account.toString());
+        try{
+            System.out.println(bankAccountService.getAccountsByNumber(bankAccountNumber).toString());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

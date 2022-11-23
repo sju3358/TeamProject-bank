@@ -132,15 +132,15 @@ public class BankAccountService
 
 
 
-    public ArrayList<BankAccountRepository> getAccountsByName(String name){
-        ArrayList<BankAccountRepository> result = new ArrayList<>();
+    public String getAccountsByName(String name){
+        String result = "";
 
         Iterator<String> iteratorOfAccount = this.bankAccountsList.keySet().iterator();
         while (iteratorOfAccount.hasNext()) {
-            BankAccountRepository Account = this.bankAccountsList.get(iteratorOfAccount.next());
+            BankAccountRepository account = this.bankAccountsList.get(iteratorOfAccount.next());
 
-            if(Account.checkOwnerName(name) == true){
-                result.add(Account);
+            if(account.checkOwnerName(name) == true){
+                result += account.toString();
             }
         }
 
