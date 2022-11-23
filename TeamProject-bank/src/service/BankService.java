@@ -102,9 +102,10 @@ public class BankService {
      * @param amount (int)
      * @param password (String)
      */
-    public void depositAndWithdrawMoney(String BankAccountNumber, int amount , String password){
+    public boolean depositAndWithdrawMoney(String BankAccountNumber, int amount , String password){
 
-        boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount, password);
+        boolean flag = false;
+        flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount, password);
 
         if(flag == true) {
             //잔고 변동시 트렌젝션 기록
@@ -115,6 +116,8 @@ public class BankService {
                     amount,
                     date);
         }
+
+        return flag;
     }
 
 

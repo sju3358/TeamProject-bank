@@ -19,12 +19,10 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
 
-
-
-
-
         boolean isExit = false;
+
         do{
+            boolean flag=false;
             UI.run();
             int menu = scan.nextInt();
             scan.nextLine();
@@ -47,9 +45,10 @@ public class Main {
                     String depositNumber = scan.nextLine();
                     System.out.println("입금하실 금액을 적어주세요 :");
                     int depositBalance = scan.nextInt();
-                    System.out.println("입금이 완료되었습니다.");
                     String depositPassword = "";
-                    kbBankService.depositAndWithdrawMoney(depositNumber, depositBalance,depositPassword);
+                    flag = kbBankService.depositAndWithdrawMoney(depositNumber, depositBalance,depositPassword);
+                    if(flag == true)
+                        System.out.println("입금이 완료되었습니다.");
                     break;
                 case 3:
                     System.out.println("출금하실 계좌번호를 입력해 주세요. ");
@@ -62,8 +61,9 @@ public class Main {
                     scan.nextLine();
                     System.out.println("비밀번호를 입력해주세요 :");
                     String withdrawPassword = scan.nextLine();
-                    System.out.println("출금이 완료되었습니다.");
-                    kbBankService.depositAndWithdrawMoney(withdrawNumber, withdrawBalance, withdrawPassword);
+                    flag = kbBankService.depositAndWithdrawMoney(withdrawNumber, withdrawBalance, withdrawPassword);
+                    if(flag == true)
+                        System.out.println("출금이 완료되었습니다.");
                     break;
                 case 4:
                     System.out.println("계좌 수정은 1번, 계좌 삭제는 2번, 계좌 잔고 확인을 하고싶으시면 3번을 눌러주세요.");
@@ -76,7 +76,7 @@ public class Main {
                         String modifiedAccountNumber = scan.nextLine();
                         System.out.println("비밀번호를 입력해주세요: ");
                         String modifiedPassword = scan.nextLine();
-                        boolean flag = kbBankService.changeAccount(modifiedname, modifiedAccountNumber, modifiedPassword);
+                        flag = kbBankService.changeAccount(modifiedname, modifiedAccountNumber, modifiedPassword);
                         if(flag){
                             System.out.println("수정이 완료되었습니다.");
                         }
@@ -85,8 +85,9 @@ public class Main {
                         String deleteAccount = scan.nextLine();
                         System.out.println("비밀번호를 입력해주세요: ");
                         String deletePassword = scan.nextLine();
-                        kbBankService.deleteAccount(deleteAccount,deletePassword);
-                        System.out.println("삭제되었습니다. ");
+                        flag = kbBankService.deleteAccount(deleteAccount,deletePassword);
+                        if(flag == true)
+                            System.out.println("삭제되었습니다. ");
                     }
                     if(Choice == 3) {
                         System.out.println("잔고 확인을 하고 싶은 계좌 번호를 입력해주세요 : ");
