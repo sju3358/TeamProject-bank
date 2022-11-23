@@ -25,7 +25,7 @@ public class BankAccountRepository {
 
 
     public long getBankBalance() {
-        return bankBalance;
+        return this.bankBalance;
     }
 
 
