@@ -6,16 +6,17 @@ package repository;
 // 소유자명, 계좌번호, 잔고로 구성
 //
 public class BankAccountRepository {
-    private String bankUseName;
+    private String bankOwnerName;
+    private String bankAccountNumber;
+    private long bankBalance;
 
-    public String getBankUseName() {
-        return bankUseName;
+    public String getBankOwnerName() {
+        return bankOwnerName;
     }
 
-    public void setBankUseName(String bankUseName) {
-        this.bankUseName = bankUseName;
+    public void setBankOwnerName(String bankOwnerName) {
+        this.bankOwnerName = bankOwnerName;
     }
-
     public String getBankAccountNumber() {
         return bankAccountNumber;
     }
@@ -32,8 +33,7 @@ public class BankAccountRepository {
         this.bankBalance = bankBalance;
     }
 
-    private String bankAccountNumber;
-    private long bankBalance;
+
 
 
 }
