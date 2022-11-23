@@ -2,7 +2,6 @@ package service;
 
 import repository.BankAccountRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -110,7 +109,6 @@ public class BankService {
         boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount, password);
 
         if(flag == true) {
-            BankAccountRepository account = bankAccountService.getAccountsByNumber(BankAccountNumber);
             //잔고 변동시 트렌젝션 기록
             LocalDateTime date = LocalDateTime.now();
             transactionHistoryService.addTransaction(
