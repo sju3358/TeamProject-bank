@@ -22,21 +22,21 @@ public class BankAccountRepository {
         this.password = password;
     }
 
-    public String getBankName() {
-        return bankName;
-    }
-    public String getBankOwnerName() {
-        return bankOwnerName;
-    }
-    public String getBankAccountNumber() {
-        return bankAccountNumber;
-    }
     public long getBankBalance() {
         return bankBalance;
     }
 
+
+
     public void addBankBalance(long money) {
         this.bankBalance += money;
+    }
+
+    public boolean checkOwnerName(String name){
+        if(this.bankOwnerName.compareTo(name) == 0)
+            return true;
+        else
+            return false;
     }
     public boolean checkPassword(String password){
         if(this.password.compareTo(password) == 0)

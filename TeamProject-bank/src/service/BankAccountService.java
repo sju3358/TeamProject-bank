@@ -38,7 +38,7 @@ public class BankAccountService
                 bankBalance,
                 password
         );
-        bankAccountsList.put(newAccount.getBankAccountNumber(), newAccount);
+        bankAccountsList.put(bankAccountNumber, newAccount);
     }
     public boolean deleteAccount(String bankAccountNumber){
 
@@ -48,7 +48,7 @@ public class BankAccountService
             if(account == null)
                 throw new NoAccountException("해당 계좌가 존재하지 않습니다.");
 
-            boolean flag = bankAccountsList.remove(account.getBankAccountNumber(), account);
+            boolean flag = bankAccountsList.remove(bankAccountNumber, account);
 
             if(flag == false)
                 throw new NoAccountException("삭제 실패");
@@ -114,7 +114,7 @@ public class BankAccountService
         while (iteratorOfAccount.hasNext()) {
             BankAccountRepository Account = this.bankAccountsList.get(iteratorOfAccount.next());
 
-            if(Account.getBankOwnerName().compareTo(name) == 0){
+            if(Account.checkOwnerName(name) == true){
                 result.add(Account);
             }
         }
