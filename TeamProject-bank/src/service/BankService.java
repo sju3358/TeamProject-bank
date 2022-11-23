@@ -97,7 +97,7 @@ public class BankService {
 
     /**
      * 계좌 입출금 메소드
-     * @param BankAccountNumber (String)
+     * @param bankAccountNumber (String)
      *  @param password (String)
      */
     public long getAccountBalance(String bankAccountNumber, String password){
