@@ -9,10 +9,9 @@ import java.util.Iterator;
 
 public class TransactionHistoryService {
 
+    //싱글톤 패턴
     private static TransactionHistoryService service;
 
-
-    //싱글톤 패턴
     private TransactionHistoryService(){
         transactionLists = new ArrayList<>();
     }
@@ -23,7 +22,15 @@ public class TransactionHistoryService {
         return service;
     }
 
+
+
+
+    //필드
     private ArrayList<TransactionRepository> transactionLists;
+
+
+
+    //메소드
     public void addTransaction(TransactionRepository transaction){
         this.transactionLists.add(transaction);
     }
@@ -35,32 +42,21 @@ public class TransactionHistoryService {
         transaction.setNameOfBank(nameOfBank);
         transaction.setAccountNumber(accountNumber);
         transaction.setAmountOfTransaction(amountOfTransaction);
-        transaction.setFlagDepositOrWithdraw(flagDepositOrWithdraw);
         transaction.setTransactionTime(transactionTime);
 
         this.transactionLists.add(transaction);
     }
+
 
     public void listTransactions(){
         Iterator<TransactionRepository> iteratorOfTransaction = this.transactionLists.iterator();
         while(iteratorOfTransaction.hasNext()){
             TransactionRepository transaction = iteratorOfTransaction.next();
 
-            String flag = null;
-            if(transaction.getFlagDepositOrWithdraw() == 1)
-                flag = "+";
-            else if(transaction.getFlagDepositOrWithdraw() == -1)
-                flag = "-";
-
             System.out.println("-----------------------------");
             System.out.println("은행명 : " + transaction.getNameOfBank());
             System.out.println("계좌번호 : " + transaction.getAccountNumber());
-
-            if(flag != null)
-                System.out.println("입출금내역 : " + flag + transaction.getAmountOfTransaction());
-            else
-                System.out.println("입출금내역이 없습니다.");
-
+            System.out.println("입출금내역 : " + transaction.getAmountOfTransaction());
             System.out.println("거래일시 : " + transaction.getTransactionTime().toString());
 
         }

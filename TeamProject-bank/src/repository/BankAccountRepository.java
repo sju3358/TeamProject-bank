@@ -10,6 +10,16 @@ public class BankAccountRepository {
     private String bankAccountNumber;
     private long bankBalance;
 
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    private String bankName;
+
     public String getBankOwnerName() {
         return bankOwnerName;
     }
