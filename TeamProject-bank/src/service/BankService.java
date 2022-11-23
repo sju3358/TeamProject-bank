@@ -32,7 +32,6 @@ public class BankService {
         bankAccountService.addAccount(this.bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
-
     /**
      * 계좌 수정 메소드
      * @param bankOwnerName (String)
@@ -40,7 +39,7 @@ public class BankService {
      * @param password (String)
      */
     public boolean changeAccount(String bankOwnerName, String bankAccountNumber, String password){
-        long bankBalance = bankAccountService.getAccountsByBankAccountNumber(bankAccountNumber).getBankBalance();
+        long bankBalance = bankAccountService.getAccountsByNumber(bankAccountNumber).getBankBalance();
         boolean flag = bankAccountService.deleteAccount(bankAccountNumber, password);
         if(flag== true) {
             addAccount(bankOwnerName, bankAccountNumber, bankBalance, password);
@@ -68,7 +67,7 @@ public class BankService {
      * 계좌 이름으로 검색 메소드
      * @param name (String)
      */
-    public void searchAccount(String name){
+    public void searchAccountByName(String name){
 
         ArrayList<BankAccountRepository> accounts = bankAccountService.getAccountsByName(name);
 
@@ -83,6 +82,16 @@ public class BankService {
     }
 
     /**
+     * 계좌 번호로 검색 메소드
+     * @param bankAccountNumber
+     */
+    public void searchAccountByNumber(String bankAccountNumber){
+        BankAccountRepository account = bankAccountService.getAccountsByNumber(bankAccountNumber);
+        if(account != null)
+            System.out.println(account.toString());
+    }
+
+    /**
      * 계좌 입출금 메소드
      * @param BankAccountNumber (String)
      * @param amount (int)
@@ -93,7 +102,7 @@ public class BankService {
         boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount, password);
 
         if(flag == true) {
-            BankAccountRepository account = bankAccountService.getAccountsByBankAccountNumber(BankAccountNumber);
+            BankAccountRepository account = bankAccountService.getAccountsByNumber(BankAccountNumber);
             //잔고 변동시 트렌젝션 기록
             LocalDateTime date = LocalDateTime.now();
             transactionHistoryService.addTransaction(
@@ -131,4 +140,5 @@ public class BankService {
         System.out.println("거래 내역 조회");
         transactionHistoryService.listTransactions();
     }
+
 }

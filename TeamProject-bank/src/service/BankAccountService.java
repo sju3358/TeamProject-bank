@@ -123,7 +123,7 @@ public class BankAccountService
 
         return result;
     }
-    public BankAccountRepository getAccountsByBankAccountNumber(String bankAccountNumber){
+    public BankAccountRepository getAccountsByNumber(String bankAccountNumber){
         try {
             BankAccountRepository account = bankAccountsList.get(bankAccountNumber);
 
