@@ -12,6 +12,10 @@ public class TransactionRepository{
     private int flagDepositOrWithdraw; //1 : deposit , -1 : withdraw;
     private LocalDate transactionTime;
 
+
+
+
+
     public String getNameOfBank() {
         return nameOfBank;
     }
