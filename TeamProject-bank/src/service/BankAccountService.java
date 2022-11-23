@@ -76,7 +76,7 @@ public class BankAccountService
             boolean flag = bankAccountsList.remove(bankAccountNumber, account);
 
             if(flag == false)
-                throw new NoAccountException("삭제 실패");
+                throw new NoAccountException("수정 실패");
 
             addAccount(bankName,ownerName,bankAccountNumber,account.getBankBalance(),password);
 
@@ -171,4 +171,5 @@ public class BankAccountService
             System.out.println(account.toString());
         }
     }
+
 }
