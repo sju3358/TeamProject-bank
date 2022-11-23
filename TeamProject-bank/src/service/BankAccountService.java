@@ -66,10 +66,11 @@ public class BankAccountService
         try{
             BankAccountRepository account = bankAccountsList.get(bankAccountNumber);
 
-            if(account.checkPassword(password) == false)
-                throw new NoAccountException("비밀번호가 일치하지 않습니다");
+
             if(account == null)
                 throw new NoAccountException("계좌가 존재하지 않습니다.");
+            if(account.checkPassword(password) == false)
+                throw new NoAccountException("비밀번호가 일치하지 않습니다");
 
             return account.getBankBalance();
         }
