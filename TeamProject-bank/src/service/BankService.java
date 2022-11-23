@@ -26,8 +26,8 @@ public class BankService {
      * @param bankAccountNumber (String)
      * @param bankBalance (long)
      */
-    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance ){
-        bankAccountService.addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance);
+    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
+        bankAccountService.addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
 
@@ -37,10 +37,11 @@ public class BankService {
      * @param bankOwnerName (String)
      * @param bankAccountNumber (String)
      * @param bankBalance (long)
+     * @param password (String)
      */
-    public void changeAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance){
+    public void changeAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
         deleteAccount(bankAccountNumber);
-        addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance);
+        addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
     /**
@@ -74,7 +75,7 @@ public class BankService {
     }
 
     /**
-     * 계좌 입출금 기능
+     * 계좌 입출금 메소드
      * @param BankAccountNumber (String)
      *  @param amount (int)
      */
@@ -94,6 +95,15 @@ public class BankService {
         }
     }
 
+    /**
+     * 계좌 입출금 메소드
+     * @param BankAccountNumber (String)
+     *  @param password (String)
+     */
+    public long getAccountBalance(String bankAccountNumber, String password){
+        long balance = bankAccountService.getAccountBalance(bankAccountNumber, password);
+        return balance;
+    }
 
     // 기능 6. 송금기능
 

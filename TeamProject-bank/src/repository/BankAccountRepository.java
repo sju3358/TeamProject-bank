@@ -11,13 +11,15 @@ public class BankAccountRepository {
     private String bankOwnerName;
     private String bankAccountNumber;
     private long bankBalance;
+    private String password;
 
 
-    public BankAccountRepository(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance){
+    public BankAccountRepository(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
         this.bankName = bankName;
         this.bankOwnerName = bankOwnerName;
         this.bankAccountNumber = bankAccountNumber;
         this.bankBalance = bankBalance;
+        this.password = password;
     }
 
     public String getBankName() {
@@ -36,7 +38,12 @@ public class BankAccountRepository {
     public void addBankBalance(long money) {
         this.bankBalance += money;
     }
-
+    public boolean checkPassword(String password){
+        if(this.password.compareTo(password) == 0)
+            return true;
+        else
+            return false;
+    }
     public String toString() {
 
         String to_string = null;

@@ -30,12 +30,13 @@ public class BankAccountService
 
 
 
-    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance){
+    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
         BankAccountRepository newAccount = new BankAccountRepository(
                 bankName,
                 bankOwnerName,
                 bankAccountNumber,
-                bankBalance
+                bankBalance,
+                password
         );
         bankAccountsList.put(newAccount.getBankAccountNumber(), newAccount);
     }
@@ -60,11 +61,13 @@ public class BankAccountService
         }
 
     }
-    public long getAccountBalance(String bankAccountNumber){
+    public long getAccountBalance(String bankAccountNumber, String password){
 
         try{
             BankAccountRepository account = bankAccountsList.get(bankAccountNumber);
 
+            if(account.checkPassword(password) == false)
+                throw new NoAccountException("비밀번호가 일치하지 않습니다");
             if(account == null)
                 throw new NoAccountException("계좌가 존재하지 않습니다.");
 
