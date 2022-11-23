@@ -41,20 +41,19 @@ public class BankService {
      * @param password (String)
      */
     public void changeAccount(String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
-        deleteAccount(bankAccountNumber);
-        addAccount(bankOwnerName,bankAccountNumber,bankBalance,password);
+        boolean flag = bankAccountService.deleteAccount(bankAccountNumber, password);
+        if(flag== true)
+                addAccount(bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
     /**
      * 계좌 삭제 메소드
      * @param bankAccountNumber (String)
      */
-    public void deleteAccount(String bankAccountNumber){
+    public void deleteAccount(String bankAccountNumber, String password){
 
-        boolean flag = bankAccountService.deleteAccount(bankAccountNumber);
+        bankAccountService.deleteAccount(bankAccountNumber, password);
 
-            if(flag == true)
-                System.out.println("삭제 성공");
     }
 
     /**
