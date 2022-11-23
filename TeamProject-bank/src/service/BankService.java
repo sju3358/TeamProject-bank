@@ -80,9 +80,9 @@ public class BankService {
      * @param BankAccountNumber (String)
      *  @param amount (int)
      */
-    public void depositAndWithdrawMoney(String BankAccountNumber, int amount){
+    public void depositAndWithdrawMoney(String BankAccountNumber, int amount , String password){
 
-        boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount);
+        boolean flag = bankAccountService.depositAndWithdraw(BankAccountNumber,amount, password);
 
         if(flag == true) {
             BankAccountRepository account = bankAccountService.getAccountsByBankAccountNumber(BankAccountNumber);
