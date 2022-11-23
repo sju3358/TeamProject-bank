@@ -9,16 +9,23 @@ import java.util.Iterator;
 
 public class TransactionHistoryService {
 
-    private static ArrayList<TransactionRepository> transactionLists;
+    private static TransactionHistoryService service;
+
 
     //싱글톤 패턴
-    public TransactionHistoryService(){
-        if(transactionLists == null)
-            transactionLists = new ArrayList<>();
+    private TransactionHistoryService(){
+        transactionLists = new ArrayList<>();
+    }
+    public static TransactionHistoryService getInstance(){
+        if(service == null){
+            service = new TransactionHistoryService();
+        }
+        return service;
     }
 
+    private ArrayList<TransactionRepository> transactionLists;
     public void addTransaction(TransactionRepository transaction){
-        transactionLists.add(transaction);
+        this.transactionLists.add(transaction);
     }
 
 
@@ -31,11 +38,11 @@ public class TransactionHistoryService {
         transaction.setFlagDepositOrWithdraw(flagDepositOrWithdraw);
         transaction.setTransactionTime(transactionTime);
 
-        transactionLists.add(transaction);
+        this.transactionLists.add(transaction);
     }
 
     public void listTransactions(){
-        Iterator<TransactionRepository> iteratorOfTransaction = transactionLists.iterator();
+        Iterator<TransactionRepository> iteratorOfTransaction = this.transactionLists.iterator();
         while(iteratorOfTransaction.hasNext()){
             TransactionRepository transaction = iteratorOfTransaction.next();
 
@@ -45,6 +52,7 @@ public class TransactionHistoryService {
             else if(transaction.getFlagDepositOrWithdraw() == -1)
                 flag = "-";
 
+            System.out.println("-----------------------------");
             System.out.println("은행명 : " + transaction.getNameOfBank());
             System.out.println("계좌번호 : " + transaction.getAccountNumber());
 
