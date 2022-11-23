@@ -2,6 +2,7 @@ package repository;
 
 
 //거래내역
+
 import java.time.*;
 public class TransactionRepository{
 
@@ -12,6 +13,15 @@ public class TransactionRepository{
     private int flagDepositOrWithdraw; //1 : deposit , -1 : withdraw;
     private LocalDate transactionTime;
 
+
+    public TransactionRepository(){}
+    public TransactionRepository(String nameOfBank, String accountNumber, int amountOfTransaction, int flagDepositOrWithdraw, LocalDate transactionTime){
+        this.nameOfBank = nameOfBank;
+        this.accountNumber = accountNumber;
+        this.amountOfTransaction = amountOfTransaction;
+        this.flagDepositOrWithdraw = flagDepositOrWithdraw;
+        this.transactionTime = transactionTime;
+    }
 
 
 
