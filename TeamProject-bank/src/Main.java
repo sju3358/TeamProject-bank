@@ -1,25 +1,19 @@
-import repository.BankAccountRepository;
+
 import service.BankService;
 import presentation.UserInterface;
-import repository.BankAccountRepository;
-import service.BankService;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         BankService kbBankService = new BankService("국민은행");
         UserInterface UI = new UserInterface();
-
-        String bankOwnerName1 = "배지호";
-        String bankAccountNumber1 = "999-999-999";
-        long bankBalance1 = 5000;
-        String bankPassword1 = "3934";
-        kbBankService.addAccount(bankOwnerName1,bankAccountNumber1,bankBalance1,bankPassword1);
-
         Scanner scan = new Scanner(System.in);
 
 
         boolean isExit = false;
+
+
+        initAccount(kbBankService);  //init with test data
 
         do{
             boolean flag=false;
@@ -135,5 +129,15 @@ public class Main {
         } while (!isExit);
 
 
+    }
+
+    private static void initAccount(BankService kbBankService){
+        String[] bankOwnerName = {"조성락","곽두영","김태이","배지호","김지환"};
+        String[] bankAccountNumber = {"111-111-1111","222-222-2222","333-333-3333","444-444-4444","555-555-5555"};
+        long [] bankBalance = {1000000,5000,100000,0,100};
+        String[] bankPassword = {"1212","3030","2412","4039","1241"};
+
+        for(int i = 0; i<bankAccountNumber.length; i++)
+            kbBankService.addAccount(bankOwnerName[i],bankAccountNumber[i],bankBalance[i],bankPassword[i]);
     }
 }
