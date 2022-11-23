@@ -96,13 +96,12 @@ public class BankService {
     }
 
     /**
-     * 계좌 입출금 메소드
+     * 잔액 조회 메소드
      * @param bankAccountNumber (String)
      *  @param password (String)
      */
     public long getAccountBalance(String bankAccountNumber, String password){
-        long balance = bankAccountService.getAccountBalance(bankAccountNumber, password);
-        return balance;
+        return bankAccountService.getAccountBalance(bankAccountNumber, password);
     }
 
     // 기능 6. 송금기능
