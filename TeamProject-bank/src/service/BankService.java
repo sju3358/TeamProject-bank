@@ -10,11 +10,13 @@ import java.util.Iterator;
 //은행서비스
 public class BankService {
 
+    private String bankName;
 
     private TransactionHistoryService transactionHistoryService;
     private BankAccountService bankAccountService;
 
-    public BankService(){
+    public BankService(String bankName){
+        this.bankName = bankName;
         transactionHistoryService = TransactionHistoryService.getInstance();
         bankAccountService = BankAccountService.getInstance();
     }
@@ -22,27 +24,25 @@ public class BankService {
 
     /**
      * 계좌 등록 메소드
-     * @param bankName (String)
      * @param bankOwnerName (String)
      * @param bankAccountNumber (String)
      * @param bankBalance (long)
      */
-    public void addAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
-        bankAccountService.addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
+    public void addAccount(String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
+        bankAccountService.addAccount(this.bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
 
     /**
      * 계좌 수정 메소드
-     * @param bankName (String)
      * @param bankOwnerName (String)
      * @param bankAccountNumber (String)
      * @param bankBalance (long)
      * @param password (String)
      */
-    public void changeAccount(String bankName, String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
+    public void changeAccount(String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
         deleteAccount(bankAccountNumber);
-        addAccount(bankName,bankOwnerName,bankAccountNumber,bankBalance,password);
+        addAccount(bankOwnerName,bankAccountNumber,bankBalance,password);
     }
 
     /**
@@ -90,8 +90,8 @@ public class BankService {
             //잔고 변동시 트렌젝션 기록
             LocalDateTime date = LocalDateTime.now();
             transactionHistoryService.addTransaction(
-                    account.getBankName(),
-                    account.getBankAccountNumber(),
+                    this.bankName,
+                    BankAccountNumber,
                     amount,
                     date);
         }
