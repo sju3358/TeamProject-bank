@@ -131,16 +131,15 @@ public class BankAccountService
     }
 
 
-
-    public String getAccountsByName(String name){
-        String result = "";
+    public ArrayList<BankAccountRepository> getAccountsByName(String name){
+        ArrayList<BankAccountRepository> result = new ArrayList<>();
 
         Iterator<String> iteratorOfAccount = this.bankAccountsList.keySet().iterator();
         while (iteratorOfAccount.hasNext()) {
             BankAccountRepository account = this.bankAccountsList.get(iteratorOfAccount.next());
 
             if(account.checkOwnerName(name) == true){
-                result += account.toString();
+                result.add(account);
             }
         }
 
@@ -162,14 +161,25 @@ public class BankAccountService
 
     }
 
+    public String getStringFromListOfAccount(ArrayList<BankAccountRepository> accounts){
 
-    public void listAccounts() {
+        String result = "";
+        Iterator<BankAccountRepository> iteratorOfAccount = accounts.iterator();
+        while (iteratorOfAccount.hasNext()) {
+            result += iteratorOfAccount.next().toString();
+        }
+
+        return result;
+    }
+    public String getListOfAccounts() {
         Iterator<String> iteratorOfAccount = this.bankAccountsList.keySet().iterator();
 
+        String result = "";
         while (iteratorOfAccount.hasNext()) {
             BankAccountRepository account = this.bankAccountsList.get(iteratorOfAccount.next());
-            System.out.println(account.toString());
+            result += account.toString();
         }
+        return result;
     }
 
 }

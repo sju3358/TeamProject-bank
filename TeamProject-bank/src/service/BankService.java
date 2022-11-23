@@ -71,7 +71,7 @@ public class BankService {
      * @param name (String)
      */
     public void searchAccountByName(String name){
-        System.out.println(bankAccountService.getAccountsByName(name));
+        System.out.println(bankAccountService.getStringFromListOfAccount(bankAccountService.getAccountsByName(name)));
     }
 
     /**
@@ -79,12 +79,8 @@ public class BankService {
      * @param bankAccountNumber
      */
     public void searchAccountByNumber(String bankAccountNumber){
-        try{
-            System.out.println(bankAccountService.getAccountsByNumber(bankAccountNumber).toString());
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        if(bankAccountService.getAccountsByNumber(bankAccountNumber) != null)
+            System.out.println(bankAccountService.getAccountsByNumber(bankAccountNumber));
     }
 
     /**
@@ -119,14 +115,14 @@ public class BankService {
      * 모든 계좌 리스트
      */
     public void listAllOfAccounts(){
-        bankAccountService.listAccounts();
+        System.out.println(bankAccountService.getListOfAccounts());
     }
 
     /**
      * 모든 거래내역 리스트
      */
     public void listAllOfTransactions(){
-        transactionHistoryService.listTransactions();
+        System.out.println(transactionHistoryService.getListOfTransactions());
     }
 
 }

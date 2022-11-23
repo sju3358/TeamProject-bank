@@ -37,11 +37,13 @@ public class TransactionHistoryService {
 
         this.transactionLists.add(transaction);
     }
-    public void listTransactions(){
+    public String getListOfTransactions(){
         Iterator<TransactionRepository> iteratorOfTransaction = this.transactionLists.iterator();
+        String result = "";
         while(iteratorOfTransaction.hasNext()){
             TransactionRepository transaction = iteratorOfTransaction.next();
-            System.out.println(transaction.toString());
+            result += transaction.toString();
         }
+        return result;
     }
 }
