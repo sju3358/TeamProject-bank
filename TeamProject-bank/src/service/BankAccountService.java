@@ -101,7 +101,7 @@ public class BankAccountService
         }
         catch (NoAccountException e) {
             System.out.println(e.getMessage());
-            return 0;
+            return -1;
         }
     }
     public boolean depositAndWithdraw(String bankAccountNumber , int amount, String password){
