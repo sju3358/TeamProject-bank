@@ -86,7 +86,7 @@ public class BankAccountService
             if (bankAccount == null)
                 throw new NoAccountException("계좌가 존재하지 않습니다.");
 
-            if (amount < 0 && bankAccount.getBankBalance() < amount)
+            if (bankAccount.getBankBalance() + amount < 0 )
                 throw new NotEnoughException("잔액이 충분하지 않습니다.");
 
             bankAccount.addBankBalance(amount);
