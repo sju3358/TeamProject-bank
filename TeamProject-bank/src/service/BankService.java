@@ -80,8 +80,6 @@ public class BankService {
 
         Iterator<BankAccountRepository> iteratorOfAccount = accounts.iterator();
 
-        System.out.println("계좌 검색 결과");
-
         while(iteratorOfAccount.hasNext()){
             BankAccountRepository account = iteratorOfAccount.next();
             System.out.println(account.toString());
@@ -127,7 +125,6 @@ public class BankService {
      * 모든 계좌 리스트
      */
     public void listAllOfAccounts(){
-        System.out.println("계좌 목록 조회");
         bankAccountService.listAccounts();
     }
 
@@ -135,7 +132,6 @@ public class BankService {
      * 모든 거래내역 리스트
      */
     public void listAllOfTransactions(){
-        System.out.println("거래 내역 조회");
         transactionHistoryService.listTransactions();
     }
 
