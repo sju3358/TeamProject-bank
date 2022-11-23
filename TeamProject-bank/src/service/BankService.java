@@ -3,6 +3,7 @@ package service;
 import repository.BankAccountRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -86,7 +87,7 @@ public class BankService {
         if(flag == true) {
             BankAccountRepository account = bankAccountService.getAccountsByBankAccountNumber(BankAccountNumber);
             //잔고 변동시 트렌젝션 기록
-            LocalDate date = LocalDate.now();
+            LocalDateTime date = LocalDateTime.now();
             transactionHistoryService.addTransaction(
                     account.getBankName(),
                     account.getBankAccountNumber(),

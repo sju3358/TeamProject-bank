@@ -4,6 +4,7 @@ package service;
 import repository.TransactionRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -26,7 +27,7 @@ public class TransactionHistoryService {
     private ArrayList<TransactionRepository> transactionLists;
 
 
-    public void addTransaction(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDate transactionTime  ){
+    public void addTransaction(String nameOfBank, String accountNumber, long amountOfTransaction, LocalDateTime transactionTime  ){
         TransactionRepository transaction = new TransactionRepository(
                 nameOfBank,
                 accountNumber,
