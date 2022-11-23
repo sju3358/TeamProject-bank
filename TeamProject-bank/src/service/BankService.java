@@ -64,6 +64,15 @@ public class BankService {
     }
 
     /**
+     * 잔액 조회 메소드
+     * @param bankAccountNumber (String)
+     *  @param password (String)
+     */
+    public long getAccountBalance(String bankAccountNumber, String password){
+        return bankAccountService.getAccountBalance(bankAccountNumber, password);
+    }
+
+    /**
      * 계좌 이름으로 검색 메소드
      * @param name (String)
      */
@@ -113,14 +122,6 @@ public class BankService {
         }
     }
 
-    /**
-     * 잔액 조회 메소드
-     * @param bankAccountNumber (String)
-     *  @param password (String)
-     */
-    public long getAccountBalance(String bankAccountNumber, String password){
-        return bankAccountService.getAccountBalance(bankAccountNumber, password);
-    }
 
     // 기능 6. 송금기능
 
