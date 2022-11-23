@@ -34,11 +34,10 @@ public class BankAccountService
 
         if(bankAccount == null)
             throw new NullPointerException("계좌가 존재하지 않습니다.");
-
-        if(amount < 0 && bankAccount.getBankBalance() < amount)
+        else if(amount < 0 && bankAccount.getBankBalance() < amount)
             throw new IllegalStateException("잔액이 충분하지 않습니다.");
-
-        bankAccount.setBankBalance(bankAccount.getBankBalance() + amount);
+        else
+            bankAccount.setBankBalance(bankAccount.getBankBalance() + amount);
     }
 
     // 기능 2. 잔고 확인 기능(소유주만 잔고확인)
@@ -48,8 +47,8 @@ public class BankAccountService
 
         if(account != null)
             throw new NullPointerException("계좌가 존재하지 않습니다.");
-
-        return account.getBankBalance();
+        else
+            return account.getBankBalance();
     }
 
 
