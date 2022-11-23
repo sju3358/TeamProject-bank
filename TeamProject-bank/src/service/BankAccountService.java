@@ -63,6 +63,29 @@ public class BankAccountService
         }
 
     }
+    public boolean modifyAccount(String bankName, String ownerName, String bankAccountNumber, String password){
+
+        try{
+            BankAccountRepository account = this.bankAccountsList.get(bankAccountNumber);
+
+            if(account == null)
+                throw new NoAccountException("해당 계좌가 존재하지 않습니다.");
+            if(account.checkPassword(password) == false)
+                throw new NoAccountException("비밀번호가 일치하지 않습니다");
+
+            boolean flag = bankAccountsList.remove(bankAccountNumber, account);
+
+            if(flag == false)
+                throw new NoAccountException("삭제 실패");
+
+            addAccount(bankName,ownerName,bankAccountNumber,account.getBankBalance(),password);
+
+            return true;
+        }catch (NoAccountException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     public long getAccountBalance(String bankAccountNumber, String password){
 
         try{

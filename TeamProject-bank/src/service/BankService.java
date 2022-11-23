@@ -39,12 +39,11 @@ public class BankService {
      * @param password (String)
      */
     public boolean changeAccount(String bankOwnerName, String bankAccountNumber, String password){
-        long bankBalance = bankAccountService.getAccountsByNumber(bankAccountNumber).getBankBalance();
-        boolean flag = bankAccountService.deleteAccount(bankAccountNumber, password);
-        if(flag== true) {
-            addAccount(bankOwnerName, bankAccountNumber, bankBalance, password);
+
+        boolean flag = bankAccountService.modifyAccount(this.bankName,bankOwnerName,bankAccountNumber,password);
+
+        if(flag== true)
             return true;
-        }
         else
             return false;
     }
