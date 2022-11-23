@@ -37,10 +37,10 @@ public class BankService {
      * 계좌 수정 메소드
      * @param bankOwnerName (String)
      * @param bankAccountNumber (String)
-     * @param bankBalance (long)
      * @param password (String)
      */
-    public boolean changeAccount(String bankOwnerName, String bankAccountNumber, long bankBalance, String password){
+    public boolean changeAccount(String bankOwnerName, String bankAccountNumber, String password){
+        long bankBalance = bankAccountService.getAccountsByBankAccountNumber(bankAccountNumber).getBankBalance();
         boolean flag = bankAccountService.deleteAccount(bankAccountNumber, password);
         if(flag== true) {
             addAccount(bankOwnerName, bankAccountNumber, bankBalance, password);
