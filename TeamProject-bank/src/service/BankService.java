@@ -103,12 +103,12 @@ public class BankService {
      */
     public boolean depositAndWithdrawMoney(String BankAccountNumber, int amount, String password) {
 
-        boolean flag = false;
-        if (amount < 0) {
-            flag = bankAccountService.depositAndWithdraw(BankAccountNumber, amount - this.commission, password);
-        } else {
-            flag = bankAccountService.depositAndWithdraw(BankAccountNumber, amount, password);
-        }
+        boolean flag;
+
+        if (amount < 0)
+            amount = amount - this.commission;
+
+        flag = bankAccountService.depositAndWithdraw(BankAccountNumber, amount, password);
 
         if (flag == true) {
             //잔고 변동시 트렌젝션 기록
